@@ -43,6 +43,12 @@
             <version>2.2.1.RELEASE</version>
         </dependency>
 
+		<!--导入日志的场景启动器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+
     </dependencies>
 
 	<build>

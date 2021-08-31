@@ -27,6 +27,13 @@ person:
 wx:
   api: https://wx.open.xxx/pay
 
+
+##########
+#配置日志相关
+logging:
+  level: debug
+
+
 #文档块,多文档块、被多属性文件所取缔。不推荐使用了
 ---
 server:
