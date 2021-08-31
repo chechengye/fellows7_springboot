@@ -1,0 +1,40 @@
+#语法格式 key: 空格(N+)val 。兄弟关系保持在同级。父子关系，需要换行缩进
+#2、大小写敏感
+#server:
+#  port: 8083
+#  compression:
+#    enabled: false
+
+#########################################
+#与实体对象匹配
+#########################################
+# 1、字符串 可以直接编写（中文与字符） "" : 里面的内容不会被转义 \r \n  保持原有含义 。   '' ： 会被转义 \n 原封不动的输出
+# 2、map与list或set集合支持行内写法 {key: val , key1: val1}
+person:
+  name: '张三\n李四'
+  age: 22
+  birthday: 2021/08/31
+  last-name: wu
+  list:
+    - cat
+    - dog
+  email: checy@163.com
+  map: {k1: lily , k2: lucy}
+  car:
+    name: 兰博基尼
+    color: 红色
+
+wx:
+  api: https://wx.open.xxx/pay
+
+#文档块,多文档块、被多属性文件所取缔。不推荐使用了
+---
+server:
+  port: 8087
+spring:
+  profiles: dev
+---
+server:
+  port: 8088
+spring:
+  profiles: prod
