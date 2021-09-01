@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.sql.DataSource;
+
 @SpringBootTest
 class Fellows7SpringbootApplicationTests {
 
@@ -31,5 +33,15 @@ class Fellows7SpringbootApplicationTests {
         System.out.println("这是测试打印！！！！");
 		logger.warn("警告日志！");
 		logger.error("错误日志！");
+	}
+
+	/**
+	 * 测试数据源
+	 */
+	@Autowired
+	DataSource dataSource;
+	@Test
+	void testFn1(){
+		System.out.println(dataSource.getClass());
 	}
 }

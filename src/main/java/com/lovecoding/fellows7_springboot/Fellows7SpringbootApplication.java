@@ -1,5 +1,6 @@
 package com.lovecoding.fellows7_springboot;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,9 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		@AutoConfigurationImportSelector:帮我们导入自动配置类 （130+）
 				META-INF/spring.factories ： 寻找需要导入配置类
  *
- *
+ *@MapperScan : 扫描所有Mybatis mapper接口的
+ * 	添加它之后就不再需要添加@Mapper注解了
  */
 @SpringBootApplication
+@MapperScan("com.lovecoding.fellows7_springboot.mapper")
 public class Fellows7SpringbootApplication {
 
 	/**
