@@ -2,7 +2,7 @@ package com.lovecoding.fellows7_springboot.pojo;
 
 import java.io.Serializable;
 
-public class Employee implements Serializable {
+public class Employee  implements Serializable{
 
     private Long id;
 
@@ -34,4 +34,6 @@ public class Employee implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

@@ -42,7 +42,11 @@ spring:
     password: sifu_2020
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-
+################################
+#配置Redis连接的主机
+################################
+  redis:
+    host: 192.168.8.140
 
 ######################
 #yml中对Mybatis配置支持

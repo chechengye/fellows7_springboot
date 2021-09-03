@@ -1,11 +1,14 @@
 package com.lovecoding.fellows7_springboot;
 
 import com.lovecoding.fellows7_springboot.pojo.Person;
+import com.lovecoding.fellows7_springboot.service.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.sql.DataSource;
 
@@ -43,5 +46,38 @@ class Fellows7SpringbootApplicationTests {
 	@Test
 	void testFn1(){
 		System.out.println(dataSource.getClass());
+	}
+
+
+	@Autowired
+	StringRedisTemplate stringRedisTemplate;
+
+	/**
+	 * stringRedisTemplate.opsForValue() : 对字符串类型数据操作
+	 * stringRedisTemplate.opsForList() : 对列表类型数据操作
+	 * stringRedisTemplate.opsForHash  : 对散列数据类型操作
+	 * stringRedisTemplate.opsForSet() : 对集合类型数据操作
+	 * stringRedisTemplate.opsForZSet() : 对有序集合类型数据操作
+	 */
+	@Test
+	void testFn2(){
+		//测试redis操作缓存字符串
+		//stringRedisTemplate.opsForValue().append("k1" , "rediscode_val");
+		stringRedisTemplate.opsForList().leftPushAll("list_code" , "r1" , "r2" , "r3");
+		//stringRedisTemplate.opsForZSet().
+	}
+
+	@Autowired
+	RedisTemplate redisTemplate;
+
+	@Autowired
+	EmployeeService es;
+
+	@Autowired
+	RedisTemplate empRedisTemplate;
+	@Test
+	void testFn3(){
+		//可以修改对象的序列化策略，来让对象可以显示出来。
+		empRedisTemplate.opsForValue().set("emp-01" , es.getEmployeeById(1l));
 	}
 }

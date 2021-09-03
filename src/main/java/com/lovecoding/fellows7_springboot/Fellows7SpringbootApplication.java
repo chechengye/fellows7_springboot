@@ -18,6 +18,14 @@ import org.springframework.cache.annotation.EnableCaching;
  * 	添加它之后就不再需要添加@Mapper注解了
  *
  * @EnableCaching：开启整个工程的缓存注解使用。
+ *
+ *
+ * Redis整合
+ *  redis的数据结构是key,value 键值对
+ *  支持的数据类型有 字符串、列表、散列、集合Set 、有序集合ZSet。
+ *  1、导入依赖
+ *  2、配置文件中添加spring.redis.host
+ *
  */
 @SpringBootApplication
 @MapperScan("com.lovecoding.fellows7_springboot.mapper")

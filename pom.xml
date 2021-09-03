@@ -81,6 +81,14 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
+		<!--添加Redis场景启动器，导入相关的依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>2.1.6.RELEASE</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
