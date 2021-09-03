@@ -3,6 +3,7 @@ package com.lovecoding.fellows7_springboot;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @SpringBootApplication : 标记一个类是主程序类、启动类、入口
@@ -15,9 +16,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  *@MapperScan : 扫描所有Mybatis mapper接口的
  * 	添加它之后就不再需要添加@Mapper注解了
+ *
+ * @EnableCaching：开启整个工程的缓存注解使用。
  */
 @SpringBootApplication
 @MapperScan("com.lovecoding.fellows7_springboot.mapper")
+@EnableCaching
 public class Fellows7SpringbootApplication {
 
 	/**
