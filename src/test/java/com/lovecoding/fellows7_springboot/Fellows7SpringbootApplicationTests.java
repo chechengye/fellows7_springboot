@@ -1,16 +1,25 @@
 package com.lovecoding.fellows7_springboot;
 
+import com.lovecoding.fellows7_springboot.pojo.Book;
 import com.lovecoding.fellows7_springboot.pojo.Person;
 import com.lovecoding.fellows7_springboot.service.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootTest
 class Fellows7SpringbootApplicationTests {
@@ -79,5 +88,62 @@ class Fellows7SpringbootApplicationTests {
 	void testFn3(){
 		//可以修改对象的序列化策略，来让对象可以显示出来。
 		empRedisTemplate.opsForValue().set("emp-01" , es.getEmployeeById(1l));
+	}
+
+
+	/**
+	 * 测试RabbitMQ相关
+	 */
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+
+	@Test
+	void testFn4(){
+		Map<String , Object> map = new HashMap<>();
+		map.put("msg" , "代码发送消息至点对点的消息队列");
+		map.put("data" , Arrays.asList(200, "数据..." , "成功!"));
+		//点对点式发送消息
+		rabbitTemplate.convertAndSend("exchange.direct" , "lovecoding" , map);
+	}
+
+	@Test
+	void testFn5(){
+		Object lovecoding = rabbitTemplate.receiveAndConvert("lovecoding");
+		System.out.println("receive msg : " + lovecoding);
+	}
+
+	@Test
+	void testFn6(){
+		Book book = new Book();
+		book.setAuthor("曹雪芹");
+		book.setBookName("红楼梦");
+		rabbitTemplate.convertAndSend("exchange.topic" , "*.news" , book);
+	}
+
+	/**
+	 * 实时监听消息队列中的消息
+	 */
+	@Test
+	void testFn7(){
+		Book book = new Book();
+		book.setAuthor("罗贯中");
+		book.setBookName("三国演义");
+		rabbitTemplate.convertAndSend("exchange.topic" , "*.news" , book);
+
+	}
+
+	/**
+	 * 使用AmqpAdmin 对象来创建交换器、队列、和绑定规则
+	 */
+	@Autowired
+	AmqpAdmin amqpAdmin;
+	@Test
+	void testFn8(){
+		//DirectExchange : 点对点式的交换器
+		//amqpAdmin.declareExchange(new DirectExchange("amqpadmin.direct"));
+		//amqpAdmin.declareQueue(new Queue("amqpadmin.news"));
+		amqpAdmin.declareBinding(new Binding("amqpadmin.news"
+				, Binding.DestinationType.QUEUE , "amqpadmin.direct"
+				, "amqpadmin.news", null));
 	}
 }

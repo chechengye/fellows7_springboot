@@ -1,6 +1,7 @@
 package com.lovecoding.fellows7_springboot;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -25,11 +26,13 @@ import org.springframework.cache.annotation.EnableCaching;
  *  支持的数据类型有 字符串、列表、散列、集合Set 、有序集合ZSet。
  *  1、导入依赖
  *  2、配置文件中添加spring.redis.host
- *
+ *@EnableRabbit :
+ * 	开启rabbit主键应用
  */
 @SpringBootApplication
 @MapperScan("com.lovecoding.fellows7_springboot.mapper")
 @EnableCaching
+@EnableRabbit
 public class Fellows7SpringbootApplication {
 
 	/**
